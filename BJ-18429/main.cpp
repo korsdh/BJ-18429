@@ -15,13 +15,17 @@ bool visit[9];
 void trace(int day) {
 	if (day == 0) now = 500;
 	if (day >= 1) {
-		if ((now - k) < 500) return;
+		if ((now - k) < 500) {
+			now = now - res[day - 1];
+			return;
+		}
 		else {
 			now = now - k;
 		}
 	}
 	if (day == n) {
 		cnt++;
+		now = now - res[day - 1] + k;
 		return;
 	}
 	for (int i = 0; i < n; i++) {
@@ -31,8 +35,10 @@ void trace(int day) {
 		now += res[day];
 		trace(day + 1);
 		visit[i] = false;
+		//now = now - res[day];
 		if (day == 0) now = 500;
 	}
+	now = now - res[day];
 }
 
 int main() {
