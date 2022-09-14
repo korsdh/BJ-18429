@@ -13,6 +13,7 @@ int res[9];
 bool visit[9];
 
 void trace(int day) {
+	if (day == 0) now = 500;
 	if (day >= 1) {
 		if ((now - k) < 500) return;
 		else {
@@ -30,6 +31,7 @@ void trace(int day) {
 		now += res[day];
 		trace(day + 1);
 		visit[i] = false;
+		if (day == 0) now = 500;
 	}
 }
 
