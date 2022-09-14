@@ -8,37 +8,33 @@ using namespace std;
 int n, k;
 int cnt = 0;
 int arr[9];
-int now = 500;
+int now[9];
 int res[9];
 bool visit[9];
 
 void trace(int day) {
-	if (day == 0) now = 500;
+	if (day == 0) now[day] = 500;
 	if (day >= 1) {
-		if ((now - k) < 500) {
-			now = now - res[day - 1];
+		if ((now[day] - k) < 500) {
 			return;
 		}
 		else {
-			now = now - k;
+			now[day] -= k;
 		}
 	}
 	if (day == n) {
 		cnt++;
-		now = now - res[day - 1] + k;
 		return;
 	}
 	for (int i = 0; i < n; i++) {
 		if (visit[i] == true) continue;
 		visit[i] = true;
 		res[day] = arr[i];
-		now += res[day];
+		now[day + 1] = now[day] + res[day];
 		trace(day + 1);
 		visit[i] = false;
-		//now = now - res[day];
-		if (day == 0) now = 500;
+		if (day == 0) now[day] = 500;
 	}
-	now = now - res[day];
 }
 
 int main() {
