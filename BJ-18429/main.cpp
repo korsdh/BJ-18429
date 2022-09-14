@@ -14,8 +14,10 @@ bool visit[9];
 
 void trace(int day) {
 	if (day >= 1) {
-		now -= k;
-		if (now < 500) return;
+		if ((now - k) < 500) return;
+		else {
+			now = now - k;
+		}
 	}
 	if (day == n) {
 		cnt++;
